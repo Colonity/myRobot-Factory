@@ -1,0 +1,28 @@
+<html>
+
+    <head>
+        <script type="text/javascript" src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    </head>
+    <script>
+        let options = {
+            host: 'mymqtt-broker.herokuapp.com',
+            port: 443,
+            protocol: 'wss'
+        };
+        let client = mqtt.connect(options)
+        client.on('connect', () => {
+            console.log('connected');
+        });
+        client.subscribe("Joint 1");
+        client.subscribe("Joint 2");
+        client.subscribe("Joint 3");
+        client.subscribe("Joint 4");
+        client.subscribe("Joint 5");
+        client.subscribe("Joint 6");
+        client.on('message', function (topic, payload) {
+            console.log([topic, payload].join(": "))
+        });
+        //client.publish("test_topic", "hello world!")
+    </script>
+
+</html>
